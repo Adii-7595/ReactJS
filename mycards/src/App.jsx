@@ -6,9 +6,10 @@ import Filter from './components/Filter';
 import Cards from './components/Cards';
 import { filterData, apiUrl } from './data';
 import { toast } from 'react-toastify'; // Assuming you're using this for error handling
-
+import './index.css'
 function App() {
   const [courses, setCourse] = useState(null);
+  const [category, setCategory] = useState(filterData[0].title);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,16 +24,25 @@ function App() {
         toast.error('Something went wrong');
       }
     };
-
+ 
     fetchData();
   }, []);
 
   return (
-    <div>
-      <Navbar />
-      <Filter filterData={filterData} />
+    <div className='app'>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Filter filterData={filterData}
+                category = {category}
+                setCategory = {setCategory}
+        />
+      </div>
       {/* Only render Cards if courses is not null */}
-      {courses ? <Cards courses={courses} /> : <p>Loading courses...</p>}
+      <div  className='cards'>
+        {courses ? <Cards courses={courses} category={category} setCategory = {setCategory}/> : <p>Loading courses...</p>}
+      </div>
     </div>
   );
 }

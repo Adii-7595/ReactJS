@@ -1,10 +1,11 @@
 import React from "react";
 
+
 const Navbar = () => {
     return (
         <div>
-            <nav>
-                <h1>
+            <nav className="navbar">
+                <h1 className='heading'>
                     Top Courses
                 </h1>
             </nav>
